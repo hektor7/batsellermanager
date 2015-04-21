@@ -9,4 +9,5 @@ import org.springframework.data.repository.Repository;
 public interface BaseRepository<T, ID extends Serializable> extends
 		Repository<T, ID> {
 	public T save(T entity);
+	
 }
