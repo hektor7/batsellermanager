@@ -20,6 +20,10 @@
 		<property name="prefix" value="/WEB-INF/views/" />
 		<property name="suffix" value=".jsp" />
 	</bean>
+	
+	<bean class="org.springframework.security.authentication.encoding.MessageDigestPasswordEncoder" id="passwordEncoder">
+        <constructor-arg value="SHA-256"/>
+    </bean>
 
 
 	<jpa:repositories base-package="org.hektor7.batsellermanager.domain.repository" />

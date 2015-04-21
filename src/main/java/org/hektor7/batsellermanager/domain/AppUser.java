@@ -8,6 +8,12 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
+import javax.persistence.Transient;
+import javax.validation.constraints.NotNull;
+
+import org.apache.commons.lang3.StringUtils;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.authentication.encoding.MessageDigestPasswordEncoder;
 
 /**
  * Entity implementation class for Entity: AppUser
@@ -17,23 +23,28 @@ import javax.persistence.Table;
 @Table
 public class AppUser implements Serializable {
 
-	/**
-	 * 
-	 */
 	private static final long serialVersionUID = -2850113271018363328L;
 
+	@Autowired
+	@Transient
+	private transient MessageDigestPasswordEncoder passwordEncoder;
+
 	@Id
-	@Column
+	@Column(unique = true, nullable = false)
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private Long id;
-	@Column
+
 	private String name;
-	@Column
+
 	private String firstSurname;
-	@Column
+
 	private String secondSurname;
-	@Column
+
+	@NotNull
+	@Column(unique = true, nullable = false)
 	private String userName;
+
+	private String password;
 
 	public AppUser() {
 		super();
@@ -77,6 +88,18 @@ public class AppUser implements Serializable {
 
 	public void setUserName(String userName) {
 		this.userName = userName;
+	}
+
+	public String getPassword() {
+		return password;
+	}
+
+	public void setPassword(String password) {
+		if (!StringUtils.isEmpty(password)) {
+			String encodedPassword = this.passwordEncoder.encodePassword(
+					password, null);
+			this.password = encodedPassword;
+		}
 	}
 
 	@Override

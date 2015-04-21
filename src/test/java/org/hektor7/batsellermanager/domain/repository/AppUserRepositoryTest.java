@@ -2,16 +2,24 @@ package org.hektor7.batsellermanager.domain.repository;
 
 import org.apache.commons.lang3.RandomStringUtils;
 import org.hektor7.batsellermanager.domain.AppUser;
+import org.hibernate.PropertyValueException;
 import org.junit.Assert;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.orm.jpa.JpaSystemException;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
 import com.sun.istack.internal.logging.Logger;
 
 
+/**
+ * Test for AppUser's repository
+ * 
+ * @author hector
+ *
+ */
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration("test-DispatcherServlet-context.xml")
 public class AppUserRepositoryTest {
@@ -46,6 +54,33 @@ public class AppUserRepositoryTest {
 		
 	}
 	
+	@Test(expected=PropertyValueException.class)
+	public void insert_invalid_user_null_username() {
+		AppUser newUser = this.createUserForInsert();
+		newUser.setUserName(null);
+		
+		try {
+			this.appUserRepository.save(newUser);
+		}catch(JpaSystemException e) {
+			if (e.getCause().getCause() != null && 
+					e.getCause().getCause() instanceof PropertyValueException) {
+				throw (PropertyValueException) e.getCause().getCause();
+			}else {
+				throw e;
+			}
+		}
+	}
+	
+	@Test
+	public void set_password_encoded() {
+		final String password="123";
+		
+		AppUser appUser = new AppUser();
+		appUser.setPassword(password);
+		
+		Assert.assertTrue(!password.equals(appUser.getPassword()));
+	
+	}
 
 	private AppUser createUserForInsert() {
 		AppUser newUser = new AppUser();
@@ -57,5 +92,7 @@ public class AppUserRepositoryTest {
 		
 		return newUser;
 	}
+	
+	
 
 }
