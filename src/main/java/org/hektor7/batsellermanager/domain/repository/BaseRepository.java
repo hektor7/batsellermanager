@@ -1,6 +1,7 @@
 package org.hektor7.batsellermanager.domain.repository;
 
 import java.io.Serializable;
+import java.util.List;
 
 import org.springframework.data.repository.NoRepositoryBean;
 import org.springframework.data.repository.Repository;
@@ -28,5 +29,28 @@ public interface BaseRepository<T, ID extends Serializable> extends
 	 * @return saved entity
 	 */
 	public T save(T entity);
+	
+	/**
+	 * It retrieves all elements from database.
+	 * @return List of given entity
+	 */
+	public List<T> findAll();
+	
+	/**
+	 * It retrieves an entity by the given Id.
+	 * 
+	 * @param id Entity's id
+	 * @return entity
+	 */
+	public T findOne(ID id);
+	
+	/**
+	 * It deletes a given entity.
+	 * 
+	 * @param entity to be deleted
+	 */
+	public void delete(T entity);
+	
+	
 
 }
