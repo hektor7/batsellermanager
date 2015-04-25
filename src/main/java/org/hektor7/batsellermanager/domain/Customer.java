@@ -29,13 +29,16 @@ public class Customer implements Serializable {
 	private Long id;
 	
 	@NotNull
+	@Column(nullable = false)
 	private String name;
+	
 	@NotNull
 	private String firstSurname;
 	
 	private String secondSurname;
 	
-	@Column(unique = true)
+	@NotNull
+	@Column(unique = true, nullable=false)
 	private String customerCode;
 	
 	@OneToMany(cascade=CascadeType.ALL)
@@ -90,6 +93,9 @@ public class Customer implements Serializable {
 		return addressInfo;
 	}
 	
+	public List<ContactInfo> getContactInfo() {
+		return contactInfo;
+	}
 	@Override
 	public int hashCode() {
 		final int prime = 31;
