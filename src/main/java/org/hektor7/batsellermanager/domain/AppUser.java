@@ -12,10 +12,10 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import javax.persistence.Transient;
-import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 
 import org.apache.commons.lang3.StringUtils;
+import org.hibernate.validator.constraints.NotEmpty;
 import org.springframework.security.authentication.encoding.MessageDigestPasswordEncoder;
 
 /**
@@ -42,7 +42,7 @@ public class AppUser implements Serializable {
 
 	private String secondSurname;
 
-	@NotNull
+	@NotEmpty
 	@Size(min=4, max=20)
 	@Column(unique = true, nullable = false)
 	private String userName;
