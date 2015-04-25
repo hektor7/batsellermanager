@@ -2,11 +2,12 @@ package org.hektor7.batsellermanager.domain.repository;
 
 import java.util.List;
 
+import javax.validation.ConstraintViolationException;
+
 import org.apache.commons.lang3.RandomStringUtils;
 import org.hektor7.batsellermanager.domain.AppUser;
 import org.hektor7.batsellermanager.domain.ContactInfo;
 import org.hektor7.batsellermanager.domain.enums.ContactInfoTypes;
-import org.hibernate.PropertyValueException;
 import org.junit.Assert;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -54,7 +55,7 @@ public class AppUserRepositoryTest {
 		
 	}
 	
-	@Test(expected=PropertyValueException.class)
+	@Test(expected=ConstraintViolationException.class)
 	public void insert_invalid_user_null_username() {
 		AppUser newUser = this.createUserForInsert();
 		newUser.setUserName(null);
@@ -63,8 +64,8 @@ public class AppUserRepositoryTest {
 			this.appUserRepository.save(newUser);
 		}catch(JpaSystemException e) {
 			if (e.getCause().getCause() != null && 
-					e.getCause().getCause() instanceof PropertyValueException) {
-				throw (PropertyValueException) e.getCause().getCause();
+					e.getCause().getCause() instanceof ConstraintViolationException) {
+				throw (ConstraintViolationException) e.getCause().getCause();
 			}else {
 				throw e;
 			}
@@ -125,6 +126,64 @@ public class AppUserRepositoryTest {
 		Long idNewUser = newUser.getId();
 		Assert.assertTrue(this.appUserRepository.findOne(idNewUser)!=null);
 	}
+	
+	@Test(expected=ConstraintViolationException.class)
+	public void insert_valid_user_w_invalid_ContactInfo_null_infoType() {
+		
+		AppUser newAppUser = this.createUserForInsert();
+		
+		newAppUser.getContactInfo().get(0).setInfoType(null);
+		
+		try {
+			this.appUserRepository.save(newAppUser);
+		}catch(JpaSystemException e) {
+			if (e.getCause().getCause() != null && 
+					e.getCause().getCause() instanceof ConstraintViolationException) {
+				throw (ConstraintViolationException) e.getCause().getCause();
+			}else {
+				throw e;
+			}
+		}
+	}
+	
+	@Test(expected=ConstraintViolationException.class)
+	public void insert_valid_user_w_invalid_ContactInfo_null_infoName() {
+		
+		AppUser newAppUser = this.createUserForInsert();
+		
+		newAppUser.getContactInfo().get(0).setInfoName(null);
+		
+		try {
+			this.appUserRepository.save(newAppUser);
+		}catch(JpaSystemException e) {
+			if (e.getCause().getCause() != null && 
+					e.getCause().getCause() instanceof ConstraintViolationException) {
+				throw (ConstraintViolationException) e.getCause().getCause();
+			}else {
+				throw e;
+			}
+		}
+	}
+	
+	@Test(expected=ConstraintViolationException.class)
+	public void insert_valid_user_w_invalid_ContactInfo_null_infoValue() {
+		
+		AppUser newAppUser = this.createUserForInsert();
+		
+		newAppUser.getContactInfo().get(0).setInfoValue(null);
+		
+		try {
+			this.appUserRepository.save(newAppUser);
+		}catch(JpaSystemException e) {
+			if (e.getCause().getCause() != null && 
+					e.getCause().getCause() instanceof ConstraintViolationException) {
+				throw (ConstraintViolationException) e.getCause().getCause();
+			}else {
+				throw e;
+			}
+		}
+	}
+	
 
 	private AppUser createUserForInsert() {
 		AppUser newUser = new AppUser();

@@ -13,6 +13,7 @@ import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import javax.persistence.Transient;
 import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
 
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.security.authentication.encoding.MessageDigestPasswordEncoder;
@@ -42,9 +43,11 @@ public class AppUser implements Serializable {
 	private String secondSurname;
 
 	@NotNull
+	@Size(min=4, max=20)
 	@Column(unique = true, nullable = false)
 	private String userName;
-
+	
+	@Size(min=6, max=20)
 	private String password;
 	
 	@OneToMany(cascade=CascadeType.ALL)

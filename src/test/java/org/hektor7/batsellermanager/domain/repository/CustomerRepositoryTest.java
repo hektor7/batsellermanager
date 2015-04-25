@@ -2,12 +2,13 @@ package org.hektor7.batsellermanager.domain.repository;
 
 import java.util.List;
 
+import javax.validation.ConstraintViolationException;
+
 import org.apache.commons.lang3.RandomStringUtils;
 import org.hektor7.batsellermanager.domain.AddressInfo;
 import org.hektor7.batsellermanager.domain.ContactInfo;
 import org.hektor7.batsellermanager.domain.Customer;
 import org.hektor7.batsellermanager.domain.enums.ContactInfoTypes;
-import org.hibernate.PropertyValueException;
 import org.junit.Assert;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -55,7 +56,7 @@ public class CustomerRepositoryTest {
 		
 	}
 	
-	@Test(expected=PropertyValueException.class)
+	@Test(expected=ConstraintViolationException.class)
 	public void insert_invalid_customer_null_name() {
 		Customer newCustomer = this.createCustomerForInsert();
 		newCustomer.setName(null);
@@ -64,15 +65,15 @@ public class CustomerRepositoryTest {
 			this.customerRepository.save(newCustomer);
 		}catch(JpaSystemException e) {
 			if (e.getCause().getCause() != null && 
-					e.getCause().getCause() instanceof PropertyValueException) {
-				throw (PropertyValueException) e.getCause().getCause();
+					e.getCause().getCause() instanceof ConstraintViolationException) {
+				throw (ConstraintViolationException) e.getCause().getCause();
 			}else {
 				throw e;
 			}
 		}
 	}
 	
-	@Test(expected=PropertyValueException.class)
+	@Test(expected=ConstraintViolationException.class)
 	public void insert_invalid_customer_null_customerCode() {
 		Customer newCustomer = this.createCustomerForInsert();
 		newCustomer.setCustomerCode(null);
@@ -81,8 +82,8 @@ public class CustomerRepositoryTest {
 			this.customerRepository.save(newCustomer);
 		}catch(JpaSystemException e) {
 			if (e.getCause().getCause() != null && 
-					e.getCause().getCause() instanceof PropertyValueException) {
-				throw (PropertyValueException) e.getCause().getCause();
+					e.getCause().getCause() instanceof ConstraintViolationException) {
+				throw (ConstraintViolationException) e.getCause().getCause();
 			}else {
 				throw e;
 			}
@@ -131,6 +132,139 @@ public class CustomerRepositoryTest {
 		Customer newCustomer = this.customerRepository.save(this.createCustomerForInsert());
 		Long idNewCustomer = newCustomer.getId();
 		Assert.assertTrue(this.customerRepository.findOne(idNewCustomer)!=null);
+	}
+	
+	@Test(expected=ConstraintViolationException.class)
+	public void insert_valid_customer_w_invalid_ContactInfo_null_infoType() {
+		
+		Customer newCustomer = this.createCustomerForInsert();
+		
+		newCustomer.getContactInfo().get(0).setInfoType(null);
+		
+		try {
+			this.customerRepository.save(newCustomer);
+		}catch(JpaSystemException e) {
+			if (e.getCause().getCause() != null && 
+					e.getCause().getCause() instanceof ConstraintViolationException) {
+				throw (ConstraintViolationException) e.getCause().getCause();
+			}else {
+				throw e;
+			}
+		}
+	}
+	
+	@Test(expected=ConstraintViolationException.class)
+	public void insert_valid_customer_w_invalid_ContactInfo_null_infoName() {
+		
+		Customer newCustomer = this.createCustomerForInsert();
+		
+		newCustomer.getContactInfo().get(0).setInfoName(null);
+		
+		try {
+			this.customerRepository.save(newCustomer);
+		}catch(JpaSystemException e) {
+			if (e.getCause().getCause() != null && 
+					e.getCause().getCause() instanceof ConstraintViolationException) {
+				throw (ConstraintViolationException) e.getCause().getCause();
+			}else {
+				throw e;
+			}
+		}
+	}
+	
+	@Test(expected=ConstraintViolationException.class)
+	public void insert_valid_customer_w_invalid_ContactInfo_null_infoValue() {
+		
+		Customer newCustomer = this.createCustomerForInsert();
+		
+		newCustomer.getContactInfo().get(0).setInfoValue(null);
+		
+		try {
+			this.customerRepository.save(newCustomer);
+		}catch(JpaSystemException e) {
+			if (e.getCause().getCause() != null && 
+					e.getCause().getCause() instanceof ConstraintViolationException) {
+				throw (ConstraintViolationException) e.getCause().getCause();
+			}else {
+				throw e;
+			}
+		}
+	}
+	
+	@Test(expected=ConstraintViolationException.class)
+	public void insert_valid_customer_w_invalid_AddressInfo_null_addressName() {
+		
+		Customer newCustomer = this.createCustomerForInsert();
+		
+		newCustomer.getAddressInfo().get(0).setAddressName(null);
+		
+		try {
+			this.customerRepository.save(newCustomer);
+		}catch(JpaSystemException e) {
+			if (e.getCause().getCause() != null && 
+					e.getCause().getCause() instanceof ConstraintViolationException) {
+				throw (ConstraintViolationException) e.getCause().getCause();
+			}else {
+				throw e;
+			}
+		}
+	}
+	
+	@Test(expected=ConstraintViolationException.class)
+	public void insert_valid_customer_w_invalid_AddressInfo_null_addressInfo() {
+		
+		Customer newCustomer = this.createCustomerForInsert();
+		
+		newCustomer.getAddressInfo().get(0).setAddressInfo(null);
+		
+		try {
+			this.customerRepository.save(newCustomer);
+		}catch(JpaSystemException e) {
+			if (e.getCause().getCause() != null && 
+					e.getCause().getCause() instanceof ConstraintViolationException) {
+				throw (ConstraintViolationException) e.getCause().getCause();
+			}else {
+				throw e;
+			}
+		}
+	}
+	
+	@Test(expected=ConstraintViolationException.class)
+	public void insert_valid_customer_w_invalid_AddressInfo_null_state() {
+		
+		Customer newCustomer = this.createCustomerForInsert();
+		
+		newCustomer.getAddressInfo().get(0).setState(null);
+		
+		try {
+			this.customerRepository.save(newCustomer);
+		}catch(JpaSystemException e) {
+			if (e.getCause().getCause() != null && 
+					e.getCause().getCause() instanceof ConstraintViolationException) {
+				throw (ConstraintViolationException) e.getCause().getCause();
+			}else {
+				throw e;
+			}
+		}
+	}
+	
+	@Test(expected=ConstraintViolationException.class)
+	public void insert_valid_customer_w_invalid_AddressInfo_null_country() {
+		
+		Customer newCustomer = this.createCustomerForInsert();
+		
+		newCustomer.getAddressInfo().get(0).setCountry(null);
+		
+		try {
+			this.customerRepository.save(newCustomer);
+		}catch(JpaSystemException e) {
+			if (e.getCause().getCause() != null && 
+					e.getCause().getCause() instanceof ConstraintViolationException) {
+				throw (ConstraintViolationException) e.getCause().getCause();
+			}else {
+				throw e;
+			}
+		}
 	}
 
 	private Customer createCustomerForInsert() {
