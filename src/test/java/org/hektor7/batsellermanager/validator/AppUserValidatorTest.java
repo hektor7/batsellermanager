@@ -11,6 +11,8 @@ import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import org.springframework.validation.BindException;
 import org.springframework.validation.ValidationUtils;
 
+//TODO: Change assertions in order to check through i18n messages.
+
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration("test-DispatcherServlet-context.xml")
 public class AppUserValidatorTest {

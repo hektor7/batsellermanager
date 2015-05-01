@@ -11,7 +11,8 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
-import javax.validation.constraints.NotNull;
+
+import org.hibernate.validator.constraints.NotEmpty;
 
 /**
  * Entity implementation class for Entity: Customer
@@ -20,67 +21,71 @@ import javax.validation.constraints.NotNull;
 @Entity
 public class Customer implements Serializable {
 
-	
 	private static final long serialVersionUID = -3045826925936099975L;
-	
+
 	@Id
 	@Column(unique = true, nullable = false)
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private Long id;
-	
-	@NotNull
+
+	@NotEmpty
 	@Column(nullable = false)
 	private String name;
-	
-	@NotNull
+
+	@NotEmpty
+	@Column(nullable = false)
 	private String firstSurname;
-	
+
 	private String secondSurname;
-	
-	@NotNull
-	@Column(unique = true, nullable=false)
+
+	@NotEmpty
+	@Column(unique = true, nullable = false)
 	private String customerCode;
-	
-	@OneToMany(cascade=CascadeType.ALL)
+
+	@OneToMany(cascade = CascadeType.ALL)
 	private List<ContactInfo> contactInfo;
-	
-	@OneToMany(cascade=CascadeType.ALL)
+
+	@OneToMany(cascade = CascadeType.ALL)
 	private List<AddressInfo> addressInfo;
-	
 
 	public Customer() {
 		super();
 		this.contactInfo = new ArrayList<ContactInfo>();
 		this.addressInfo = new ArrayList<AddressInfo>();
-	}   
+	}
+
 	public Long getId() {
 		return this.id;
 	}
 
 	public void setId(Long id) {
 		this.id = id;
-	}   
+	}
+
 	public String getName() {
 		return this.name;
 	}
 
 	public void setName(String name) {
 		this.name = name;
-	}   
+	}
+
 	public String getFirstSurname() {
 		return this.firstSurname;
 	}
 
 	public void setFirstSurname(String firstSurname) {
 		this.firstSurname = firstSurname;
-	}   
+	}
+
 	public String getSecondSurname() {
 		return this.secondSurname;
 	}
 
 	public void setSecondSurname(String secondSurname) {
 		this.secondSurname = secondSurname;
-	}   
+	}
+
 	public String getCustomerCode() {
 		return this.customerCode;
 	}
@@ -88,14 +93,15 @@ public class Customer implements Serializable {
 	public void setCustomerCode(String customerCode) {
 		this.customerCode = customerCode;
 	}
-	
+
 	public List<AddressInfo> getAddressInfo() {
 		return addressInfo;
 	}
-	
+
 	public List<ContactInfo> getContactInfo() {
 		return contactInfo;
 	}
+
 	@Override
 	public int hashCode() {
 		final int prime = 31;
@@ -103,6 +109,7 @@ public class Customer implements Serializable {
 		result = prime * result + ((id == null) ? 0 : id.hashCode());
 		return result;
 	}
+
 	@Override
 	public boolean equals(Object obj) {
 		if (this == obj)
@@ -119,11 +126,12 @@ public class Customer implements Serializable {
 			return false;
 		return true;
 	}
+
 	@Override
 	public String toString() {
 		return "Customer [id=" + id + ", name=" + name + ", firstSurname="
 				+ firstSurname + ", secondSurname=" + secondSurname
 				+ ", customerCode=" + customerCode + "]";
 	}
-   
+
 }

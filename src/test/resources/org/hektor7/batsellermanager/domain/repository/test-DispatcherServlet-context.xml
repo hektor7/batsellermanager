@@ -37,9 +37,8 @@
 		<property name="validationMessageSource" ref="messageSource" />
 	</bean>
 
-	<bean id="productValidator" class="org.hektor7.batsellermanager.validator.AppUserValidator">
-
-	</bean>
+	<bean id="appUserValidator" class="org.hektor7.batsellermanager.validator.AppUserValidator"/>
+	<bean id="customerValidator" class="org.hektor7.batsellermanager.validator.CustomerValidator"/>
 
 	<jpa:repositories base-package="org.hektor7.batsellermanager.domain.repository" />
 

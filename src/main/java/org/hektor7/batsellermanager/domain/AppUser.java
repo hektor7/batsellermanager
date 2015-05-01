@@ -45,9 +45,9 @@ public class AppUser implements Serializable {
 	@NotEmpty
 	@Size(min=4, max=20)
 	@Column(unique = true, nullable = false)
+	//TODO: Create @UserName validator
 	private String userName;
 	
-	@Size(min=6, max=20)
 	private String password;
 	
 	@OneToMany(cascade=CascadeType.ALL)
