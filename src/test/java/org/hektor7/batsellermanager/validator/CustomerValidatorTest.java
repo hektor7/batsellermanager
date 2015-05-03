@@ -40,10 +40,40 @@ public class CustomerValidatorTest {
 		Assert.assertTrue(bindException.getMessage().contains("no puede estar vacío"));
 	}
 	
-	//TODO: Customer with empty first surname
-	//TODO: Customer with empty costumer's code
-	//TODO: Customer with invalid AddressInfo
-	//TODO: Costomer with invalid ContactInfo
+	
+	@Test
+	public void customer_with_null_first_surname() {
+		// Arrange
+		Customer customer = this.createValidCustomer();
+		customer.setFirstSurname(null);
+		
+		BindException bindException = new BindException(customer, "customer");
+
+		// Act
+		ValidationUtils.invokeValidator(this.customerValidator, customer,
+				bindException);
+
+		// Assert
+		Assert.assertEquals(1, bindException.getErrorCount());
+		Assert.assertTrue(bindException.getMessage().contains("no puede estar vacío"));
+	}
+	
+	@Test
+	public void customer_with_null_customer_code() {
+		// Arrange
+		Customer customer = this.createValidCustomer();
+		customer.setCustomerCode(null);
+		
+		BindException bindException = new BindException(customer, "customer");
+
+		// Act
+		ValidationUtils.invokeValidator(this.customerValidator, customer,
+				bindException);
+
+		// Assert
+		Assert.assertEquals(1, bindException.getErrorCount());
+		Assert.assertTrue(bindException.getMessage().contains("no puede estar vacío"));
+	}
 	
 	private Customer createValidCustomer() {
 		Customer customer = new Customer();

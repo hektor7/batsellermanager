@@ -14,6 +14,8 @@ import javax.persistence.OneToMany;
 
 import org.hibernate.validator.constraints.NotEmpty;
 
+//TODO: Customer have to have at least one main AddressInfo
+//TODO: Customer have to have at least one main ContactInfo
 /**
  * Entity implementation class for Entity: Customer
  *
