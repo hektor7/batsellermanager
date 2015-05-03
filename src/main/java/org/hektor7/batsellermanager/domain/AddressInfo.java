@@ -40,7 +40,7 @@ public class AddressInfo implements Serializable {
 	private String state;
 
 	@Pattern(regexp = "[0-9]+")
-	@Size(max = 5)
+	@Size(max = 5, min=5)
 	private String zipcode;
 
 	// TODO: Create an annotation @Country

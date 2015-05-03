@@ -39,6 +39,8 @@
 
 	<bean id="appUserValidator" class="org.hektor7.batsellermanager.validator.AppUserValidator"/>
 	<bean id="customerValidator" class="org.hektor7.batsellermanager.validator.CustomerValidator"/>
+	<bean id="addressInfoValidator" class="org.hektor7.batsellermanager.validator.AddressInfoValidator"/>
+	<bean id="contactInfoValidator" class="org.hektor7.batsellermanager.validator.ContactInfoValidator"/>
 
 	<jpa:repositories base-package="org.hektor7.batsellermanager.domain.repository" />
 
