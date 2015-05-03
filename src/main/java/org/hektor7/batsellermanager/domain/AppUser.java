@@ -18,6 +18,7 @@ import org.apache.commons.lang3.StringUtils;
 import org.hibernate.validator.constraints.NotEmpty;
 import org.springframework.security.authentication.encoding.MessageDigestPasswordEncoder;
 
+//TODO: User have to have at least one main ContactInfo
 /**
  * Entity implementation class for Entity: AppUser
  *
