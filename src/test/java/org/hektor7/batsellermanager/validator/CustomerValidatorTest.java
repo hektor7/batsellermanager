@@ -28,7 +28,7 @@ public class CustomerValidatorTest {
 		// Arrange
 		Customer customer = this.createValidCustomer();
 		customer.setName(null);
-		
+
 		BindException bindException = new BindException(customer, "customer");
 
 		// Act
@@ -37,16 +37,16 @@ public class CustomerValidatorTest {
 
 		// Assert
 		Assert.assertEquals(1, bindException.getErrorCount());
-		Assert.assertTrue(bindException.getMessage().contains("no puede estar vacío"));
+		Assert.assertTrue(bindException.getMessage().contains(
+				"no puede estar vacío"));
 	}
-	
-	
+
 	@Test
 	public void customer_with_null_first_surname() {
 		// Arrange
 		Customer customer = this.createValidCustomer();
 		customer.setFirstSurname(null);
-		
+
 		BindException bindException = new BindException(customer, "customer");
 
 		// Act
@@ -55,15 +55,16 @@ public class CustomerValidatorTest {
 
 		// Assert
 		Assert.assertEquals(1, bindException.getErrorCount());
-		Assert.assertTrue(bindException.getMessage().contains("no puede estar vacío"));
+		Assert.assertTrue(bindException.getMessage().contains(
+				"no puede estar vacío"));
 	}
-	
+
 	@Test
 	public void customer_with_null_customer_code() {
 		// Arrange
 		Customer customer = this.createValidCustomer();
 		customer.setCustomerCode(null);
-		
+
 		BindException bindException = new BindException(customer, "customer");
 
 		// Act
@@ -72,38 +73,38 @@ public class CustomerValidatorTest {
 
 		// Assert
 		Assert.assertEquals(1, bindException.getErrorCount());
-		Assert.assertTrue(bindException.getMessage().contains("no puede estar vacío"));
+		Assert.assertTrue(bindException.getMessage().contains(
+				"no puede estar vacío"));
 	}
-	
+
 	private Customer createValidCustomer() {
 		Customer customer = new Customer();
-		
+
 		customer.setCustomerCode(RandomStringUtils.randomAlphanumeric(5));
 		customer.setName(RandomStringUtils.randomAlphabetic(5));
 		customer.setFirstSurname(RandomStringUtils.randomAlphabetic(10));
 		customer.setSecondSurname(RandomStringUtils.randomAlphabetic(10));
-		
+
 		customer.getAddressInfo().add(this.createValidAddressInfo());
 		customer.getContactInfo().add(this.createValidContactInfo());
-		
-		
+
 		return customer;
 	}
 
 	private ContactInfo createValidContactInfo() {
 		ContactInfo contactInfo = new ContactInfo();
-		
+
 		contactInfo.setInfoName(RandomStringUtils.randomAlphabetic(5));
 		contactInfo.setInfoType(ContactInfoTypes.EMAIL);
 		contactInfo.setInfoValue(RandomStringUtils.randomAlphabetic(20));
-		
+
 		return contactInfo;
 	}
 
 	private AddressInfo createValidAddressInfo() {
-		
+
 		AddressInfo addressInfo = new AddressInfo();
-		
+
 		addressInfo.setAddressInfo(RandomStringUtils.randomAlphabetic(50));
 		addressInfo.setAddressName(RandomStringUtils.randomAlphabetic(5));
 		addressInfo.setCountry(RandomStringUtils.randomAlphabetic(5));
@@ -111,9 +112,9 @@ public class CustomerValidatorTest {
 		addressInfo.setMainAddress(true);
 		addressInfo.setState(RandomStringUtils.randomAlphabetic(5));
 		addressInfo.setZipcode(RandomStringUtils.randomAlphabetic(5));
-		
+
 		return addressInfo;
-		
-	}	
+
+	}
 
 }
