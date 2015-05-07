@@ -66,6 +66,7 @@
 	
 	<!-- END Custom Product Validation (Spring & Bean Validation) -->
 	
+	<!-- START Persistence config -->
 	<jpa:repositories base-package="org.hektor7.batsellermanager.domain.repository" />
 
 	<bean id="dataSource"
@@ -83,5 +84,7 @@
 	<bean id="transactionManager" class="org.springframework.orm.jpa.JpaTransactionManager">
 		<property name="entityManagerFactory" ref="entityManagerFactory" />
 	</bean>
+	
+	<!-- END Persistence config -->
 
 </beans>
