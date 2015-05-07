@@ -15,6 +15,12 @@
 	<context:component-scan base-package="org.hektor7.batsellermanager" />
 	
 	<mvc:resources location="/resources/" mapping="/resource/**" />
+	
+	<mvc:interceptors>
+		<bean class="org.springframework.web.servlet.i18n.LocaleChangeInterceptor">
+			<property name="paramName" value="language" />
+		</bean>
+	</mvc:interceptors>
 
 
 	<bean
@@ -32,8 +38,16 @@
 	<bean id="messageSource"
 		class="org.springframework.context.support.ResourceBundleMessageSource">
 		<property name="basename" value="messages" />
+		<property name="fallbackToSystemLocale" value="false" /> <!-- For i18n configuration -->
 	</bean>
 
+	<!-- START I18n -->
+	<bean id="localeResolver"
+		class="org.springframework.web.servlet.i18n.SessionLocaleResolver">
+		<property name="defaultLocale" value="en" />
+	</bean>
+	<!-- END I18n -->
+	
 	<!--START Bean validation support -->
 	
 	<bean id="validator"
