@@ -1,0 +1,104 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:context="http://www.springframework.org/schema/context"
+	xmlns:mvc="http://www.springframework.org/schema/mvc"
+	xmlns:webflow-config="http://www.springframework.org/schema/webflow-config"
+	xmlns:jpa="http://www.springframework.org/schema/data/jpa"
+	xsi:schemaLocation="http://www.springframework.org/schema/webflow-config http://www.springframework.org/schema/webflow-config/spring-webflow-config-2.3.xsd
+		http://www.springframework.org/schema/mvc http://www.springframework.org/schema/mvc/spring-mvc-4.0.xsd
+		http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+		http://www.springframework.org/schema/data/jpa http://www.springframework.org/schema/data/jpa/spring-jpa-1.3.xsd
+		http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-4.1.xsd">
+
+	<mvc:annotation-driven enable-matrix-variables="true" validator="validator"/>
+
+	<context:component-scan base-package="org.hektor7.batsellermanager" />
+	
+	<mvc:resources location="/resources/" mapping="/resource/**" />
+	
+	<mvc:interceptors>
+		<bean class="org.springframework.web.servlet.i18n.LocaleChangeInterceptor">
+			<property name="paramName" value="language" />
+		</bean>
+	</mvc:interceptors>
+
+
+	<bean
+		class="org.springframework.web.servlet.view.InternalResourceViewResolver">
+		<property name="prefix" value="/WEB-INF/views/" />
+		<property name="suffix" value=".jsp" />
+	</bean>
+
+	<bean
+		class="org.springframework.security.authentication.encoding.MessageDigestPasswordEncoder"
+		id="passwordEncoder">
+		<constructor-arg value="SHA-256" />
+	</bean>
+
+	<bean id="messageSource"
+		class="org.springframework.context.support.ResourceBundleMessageSource">
+		<property name="basename" value="messages" />
+		<property name="fallbackToSystemLocale" value="false" /> <!-- For i18n configuration -->
+	</bean>
+
+	<!-- START I18n -->
+	<bean id="localeResolver"
+		class="org.springframework.web.servlet.i18n.SessionLocaleResolver">
+		<property name="defaultLocale" value="en" />
+	</bean>
+	<!-- END I18n -->
+	
+	<!--START Bean validation support -->
+	
+	<bean id="validator"
+		class="org.springframework.validation.beanvalidation.LocalValidatorFactoryBean">
+		<property name="validationMessageSource" ref="messageSource" />
+	</bean>
+	
+	<!--END Bean validation support -->
+	
+	<!-- START Custom Product Validation (Spring & Bean Validation) -->
+	<bean id="appUserValidator" class="org.hektor7.batsellermanager.validator.AppUserValidator">
+		<property name="springValidators">
+			<set>
+				<ref bean="contactInfoValidator" />
+			</set>
+		</property>
+	</bean>
+	
+	<bean id="customerValidator" class="org.hektor7.batsellermanager.validator.CustomerValidator">
+		<property name="springValidators">
+			<set>
+				<ref bean="addressInfoValidator" />
+				<ref bean="contactInfoValidator" />
+			</set>
+		</property>
+	</bean>
+	
+	<bean id="addressInfoValidator" class="org.hektor7.batsellermanager.validator.AddressInfoValidator"/>
+	<bean id="contactInfoValidator" class="org.hektor7.batsellermanager.validator.ContactInfoValidator"/>
+	
+	<!-- END Custom Product Validation (Spring & Bean Validation) -->
+	
+	<!-- START Persistence config -->
+	<jpa:repositories base-package="org.hektor7.batsellermanager.domain.repository" />
+
+	<bean id="dataSource"
+		class="org.springframework.jdbc.datasource.DriverManagerDataSource">
+		<property name="url" value="jdbc:hsqldb:file:batsellermanager" />
+	</bean>
+
+	<bean id="entityManagerFactory"
+		class="org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean">
+		<property name="dataSource" ref="dataSource" />
+		<property name="persistenceXmlLocation" value="classpath:/META-INF/persistence.xml" />
+		<property name="persistenceUnitName" value="batsellermanagerPersistenceUnit" />
+	</bean>
+
+	<bean id="transactionManager" class="org.springframework.orm.jpa.JpaTransactionManager">
+		<property name="entityManagerFactory" ref="entityManagerFactory" />
+	</bean>
+	
+	<!-- END Persistence config -->
+
+</beans>
