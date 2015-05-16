@@ -83,7 +83,7 @@ public class AppUserController {
 
 	@RequestMapping(value = "/add", method = RequestMethod.POST)
 	public String processAddNewAppUserForm(
-			@ModelAttribute("newAppUSer") @Valid AppUser newAppUser,
+			@ModelAttribute("newAppUser") @Valid AppUser newAppUser,
 			BindingResult result, // For customize the WebDataBinder
 			HttpServletRequest request) {
 
