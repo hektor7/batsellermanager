@@ -29,13 +29,13 @@ public interface AppUserService {
 	public AppUser getAppUserById(long appUserId);
 
 	/**
-	 * Method to add an appUser.
+	 * Method to save an appUser.
 	 * 
 	 * @param appUser
-	 *            new appUser
+	 *            appUser to be saved
 	 * @return an AppUser
 	 */
-	public AppUser addAppUser(AppUser appUser);
+	public AppUser saveAppUser(AppUser appUser);
 
 	/**
 	 * Method to remove an appUser
@@ -44,5 +44,13 @@ public interface AppUserService {
 	 *            appUser to be removed
 	 */
 	public void removeAppUser(AppUser appUser);
+
+	/**
+	 * Method to get an AppUser through given user name.
+	 * 
+	 * @param userName user name for filter
+	 * @return AppUser with the given user name
+	 */
+	public AppUser getAppUserByUserName(String userName);
 
 }

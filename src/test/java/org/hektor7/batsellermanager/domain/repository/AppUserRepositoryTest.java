@@ -184,6 +184,16 @@ public class AppUserRepositoryTest {
 		}
 	}
 	
+	@Test
+	public void insert_valid_user_and_search_by_username() {
+		AppUser appUser = this.createUserForInsert();
+		this.appUserRepository.save(appUser);
+		
+		AppUser appUserSearch = this.appUserRepository.findByUserName(appUser.getUserName());
+		
+		Assert.assertTrue(appUser.equals(appUserSearch));
+	}
+	
 
 	private AppUser createUserForInsert() {
 		AppUser newUser = new AppUser();

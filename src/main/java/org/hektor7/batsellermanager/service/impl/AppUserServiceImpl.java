@@ -28,13 +28,17 @@ public class AppUserServiceImpl implements AppUserService {
 		return this.appUserRepository.findOne(appUserId);
 	}
 
-	public AppUser addAppUser(AppUser appUser) {
+	public AppUser saveAppUser(AppUser appUser) {
 		return this.appUserRepository.save(appUser);
 	}
 
 	public void removeAppUser(AppUser appUser) {
 		this.appUserRepository.delete(appUser);
 		
+	}
+
+	public AppUser getAppUserByUserName(String userName) {
+		return this.appUserRepository.findByUserName(userName);
 	}
 
 }

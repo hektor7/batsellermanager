@@ -109,7 +109,7 @@ public class AppUserControllerTest {
 	}
 
 	private AppUser insertValidUser() {
-		return this.appUserService.addAppUser(this.createValidAppUser());
+		return this.appUserService.saveAppUser(this.createValidAppUser());
 
 	}
 

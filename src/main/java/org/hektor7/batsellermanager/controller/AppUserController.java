@@ -93,7 +93,7 @@ public class AppUserController {
 
 		this.checkForNonAllowedFieldsOnInsert(result);
 
-		this.appUserService.addAppUser(newAppUser);
+		this.appUserService.saveAppUser(newAppUser);
 
 		return "redirect:/appUsers";
 	}

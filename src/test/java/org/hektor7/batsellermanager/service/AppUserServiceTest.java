@@ -30,12 +30,28 @@ public class AppUserServiceTest {
 		// Arrange
 		AppUser appUser = this.createValidAppUser();
 		
-		AppUser persistedAppUser = this.appUserService.addAppUser(appUser);
+		AppUser persistedAppUser = this.appUserService.saveAppUser(appUser);
 		
 		Assert.assertTrue(persistedAppUser.equals(this.appUserService.getAppUserById(persistedAppUser.getId())));
 		
 		this.appUserService.removeAppUser(persistedAppUser);
 
+	}
+	
+	@Test
+	public void testModifyAppUser() {
+		//Arrange
+		AppUser appUser = this.obtainInsertedAppUser();
+		
+		String oldName = appUser.getName();
+		
+		appUser.setName("MODIFIED");
+		
+		appUser = this.appUserService.saveAppUser(appUser);
+		
+		AppUser appUserModified = this.appUserService.getAppUserByUserName(appUser.getUserName());
+		
+		Assert.assertTrue(!appUserModified.getName().equals(oldName));
 	}
 
 	
@@ -52,7 +68,7 @@ public class AppUserServiceTest {
 	}
 
 	private AppUser insertValidUser() {
-		return this.appUserService.addAppUser(this.createValidAppUser());
+		return this.appUserService.saveAppUser(this.createValidAppUser());
 		
 	}
 
