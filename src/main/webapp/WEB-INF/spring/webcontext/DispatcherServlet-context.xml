@@ -10,12 +10,13 @@
 		http://www.springframework.org/schema/data/jpa http://www.springframework.org/schema/data/jpa/spring-jpa-1.3.xsd
 		http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-4.1.xsd">
 
-	<mvc:annotation-driven enable-matrix-variables="true" validator="validator"/>
+	<mvc:annotation-driven enable-matrix-variables="true"
+		validator="validator" />
 
 	<context:component-scan base-package="org.hektor7.batsellermanager" />
-	
+
 	<mvc:resources location="/resources/" mapping="/resource/**" />
-	
+
 	<mvc:interceptors>
 		<bean class="org.springframework.web.servlet.i18n.LocaleChangeInterceptor">
 			<property name="paramName" value="language" />
@@ -47,16 +48,16 @@
 		<property name="defaultLocale" value="en" />
 	</bean>
 	<!-- END I18n -->
-	
+
 	<!--START Bean validation support -->
-	
+
 	<bean id="validator"
 		class="org.springframework.validation.beanvalidation.LocalValidatorFactoryBean">
 		<property name="validationMessageSource" ref="messageSource" />
 	</bean>
-	
+
 	<!--END Bean validation support -->
-	
+
 	<!-- START Custom Product Validation (Spring & Bean Validation) -->
 	<bean id="appUserValidator" class="org.hektor7.batsellermanager.validator.AppUserValidator">
 		<property name="springValidators">
@@ -65,8 +66,9 @@
 			</set>
 		</property>
 	</bean>
-	
-	<bean id="customerValidator" class="org.hektor7.batsellermanager.validator.CustomerValidator">
+
+	<bean id="customerValidator"
+		class="org.hektor7.batsellermanager.validator.CustomerValidator">
 		<property name="springValidators">
 			<set>
 				<ref bean="addressInfoValidator" />
@@ -74,18 +76,23 @@
 			</set>
 		</property>
 	</bean>
-	
-	<bean id="addressInfoValidator" class="org.hektor7.batsellermanager.validator.AddressInfoValidator"/>
-	<bean id="contactInfoValidator" class="org.hektor7.batsellermanager.validator.ContactInfoValidator"/>
-	
+
+	<bean id="addressInfoValidator"
+		class="org.hektor7.batsellermanager.validator.AddressInfoValidator" />
+	<bean id="contactInfoValidator"
+		class="org.hektor7.batsellermanager.validator.ContactInfoValidator" />
+
 	<!-- END Custom Product Validation (Spring & Bean Validation) -->
-	
+
 	<!-- START Persistence config -->
 	<jpa:repositories base-package="org.hektor7.batsellermanager.domain.repository" />
 
 	<bean id="dataSource"
 		class="org.springframework.jdbc.datasource.DriverManagerDataSource">
+		<property name="driverClassName" value="org.hsqldb.jdbcDriver" />
 		<property name="url" value="jdbc:hsqldb:file:batsellermanager" />
+		<property name="username" value="sa" />
+		<property name="password" value="" />
 	</bean>
 
 	<bean id="entityManagerFactory"
@@ -98,7 +105,7 @@
 	<bean id="transactionManager" class="org.springframework.orm.jpa.JpaTransactionManager">
 		<property name="entityManagerFactory" ref="entityManagerFactory" />
 	</bean>
-	
+
 	<!-- END Persistence config -->
 
 </beans>

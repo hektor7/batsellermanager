@@ -49,14 +49,14 @@ public class AppUserController {
 	@RequestMapping
 	public String list(Model model) {
 		model.addAttribute("appUsers", this.appUserService.getAllAppUsers());
-		return "appUsers";
+		return "appUsers/list";
 	}
 
 	@RequestMapping("/all")
 	public String allAppUsers(Model model) {
 		model.addAttribute("appUsers", this.appUserService.getAllAppUsers());
 
-		return "appUsers";
+		return "appUsers/list";
 	}
 
 	@RequestMapping("/appUser")
@@ -72,13 +72,13 @@ public class AppUserController {
 		// handled by the handleError method.
 		model.addAttribute("appUser", this.appUserService.getAppUserById(id));
 
-		return "appUser";
+		return "appUsers/details";
 	}
 
 	@RequestMapping(value = "/add", method = RequestMethod.GET)
 	public String getAddNewAppUserForm(
 			@ModelAttribute("newAppUser") AppUser newAppUser) {
-		return "addAppUser";
+		return "appUsers/form";
 	}
 
 	@RequestMapping(value = "/add", method = RequestMethod.POST)
@@ -88,14 +88,14 @@ public class AppUserController {
 			HttpServletRequest request) {
 
 		if (result.hasErrors()) {
-			return "addAppUser";
+			return "appUsers/form";
 		}
 
 		this.checkForNonAllowedFieldsOnInsert(result);
 
 		this.appUserService.saveAppUser(newAppUser);
 
-		return "redirect:/appUsers";
+		return "redirect:/appUsers/list";
 	}
 
 	/**
