@@ -69,7 +69,7 @@ public class AppUserControllerTest {
 				post("/appUsers/add").contentType(
 						MediaType.APPLICATION_FORM_URLENCODED).param(
 						"userName", appUser.getUserName())).andExpect(
-				view().name("redirect:/appUsers/list"));
+				view().name("redirect:/appUsers"));
 		/*
 		 * .andExpect(status().isOk()) .andExpect(view().name("todo/add"))
 		 * .andExpect(forwardedUrl("/WEB-INF/jsp/todo/add.jsp"))

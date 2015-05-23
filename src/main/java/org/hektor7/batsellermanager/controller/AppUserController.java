@@ -95,7 +95,7 @@ public class AppUserController {
 
 		this.appUserService.saveAppUser(newAppUser);
 
-		return "redirect:/appUsers/list";
+		return "redirect:/appUsers";
 	}
 
 	/**
