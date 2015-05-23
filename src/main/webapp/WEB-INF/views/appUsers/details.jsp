@@ -7,17 +7,15 @@
 			<h3>${appUser.userName}</h3>
 
 			<p>
-				<strong><spring:message code="appUser.details.name.label" /></strong>
-				: ${appUser.name}
+				<strong><spring:message code="appUser.details.name.label" />:</strong>
+				${appUser.name}
 			</p>
 			<p>
-				<strong><spring:message
-						code="appUser.details.firstSurname.label" /></strong> :
+				<strong><spring:message code="appUser.details.firstSurname.label" />:</strong>
 				${appUser.firstSurname}
 			</p>
 			<p>
-				<strong><spring:message
-						code="appUser.details.secondSurname.label" /></strong> :
+				<strong><spring:message code="appUser.details.secondSurname.label" />:</strong>
 				${appUser.secondSurname}
 			</p>
 			<p>

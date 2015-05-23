@@ -9,8 +9,8 @@
 					<div class="caption">
 						<h3>${appUser.userName}</h3>
 						<p>${appUser.name}</p>
-						<p>$${appUser.firstSurname}</p>
-						<p>$${appUser.secondSurname}</p>
+						<p>${appUser.firstSurname}</p>
+						<p>${appUser.secondSurname}</p>
 						<p>
 							<a
 								href="<spring:url value="/appUsers/appUser?id=${appUser.id}" htmlEscape="true"/>"

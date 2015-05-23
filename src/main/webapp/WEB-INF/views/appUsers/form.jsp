@@ -4,8 +4,7 @@
 
 
 <section class="container">
-	<form:form modelAttribute="newAppUser" class="form-horizontal"
-		enctype="multipart/form-data">
+	<form:form modelAttribute="newAppUser" class="form-horizontal">
 		<form:errors path="*" cssClass="alert alert-danger" element="div" />
 		<fieldset>
 			<legend>
