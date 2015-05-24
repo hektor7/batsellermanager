@@ -1,0 +1,1 @@
+<p>&copy; Dummy company 2015</p>
