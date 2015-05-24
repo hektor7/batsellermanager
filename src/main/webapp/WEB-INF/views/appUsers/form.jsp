@@ -8,12 +8,12 @@
 		<form:errors path="*" cssClass="alert alert-danger" element="div" />
 		<fieldset>
 			<legend>
-				<spring:message code="addAppUser.form.formTitle" />
+				<spring:message code="appUser.form.formTitle" />
 			</legend>
 
 			<div class="form-group">
 				<label class="control-label col-lg-2 col-lg-2" for="iUserName">
-					<spring:message code="addAppUser.form.userName.label" />
+					<spring:message code="appUser.form.userName.label" />
 				</label>
 				<div class="col-lg-10">
 					<form:input id="iUserName" path="userName" type="text"
@@ -24,7 +24,7 @@
 			
 			<div class="form-group">
 				<label class="control-label col-lg-2 col-lg-2" for="iName">
-					<spring:message code="addAppUser.form.name.label" />
+					<spring:message code="appUser.form.name.label" />
 				</label>
 				<div class="col-lg-10">
 					<form:input id="iName" path="name" type="text"
@@ -35,7 +35,7 @@
 			
 			<div class="form-group">
 				<label class="control-label col-lg-2 col-lg-2" for="iFirstSurname">
-					<spring:message code="addAppUser.form.firstSurname.label" />
+					<spring:message code="appUser.form.firstSurname.label" />
 				</label>
 				<div class="col-lg-10">
 					<form:input id="iFirstSurname" path="firstSurname" type="text"
@@ -46,7 +46,7 @@
 			
 			<div class="form-group">
 				<label class="control-label col-lg-2 col-lg-2" for="iSecondSurname">
-					<spring:message code="addAppUser.form.secondSurname.label" />
+					<spring:message code="appUser.form.secondSurname.label" />
 				</label>
 				<div class="col-lg-10">
 					<form:input id="iFirstSurname" path="secondSurname" type="text"
@@ -59,7 +59,7 @@
 			<div class="form-group">
 				<div class="col-lg-offset-2 col-lg-10">
 					<input type="submit" id="btnAdd" class="btn btn-primary"
-						value="<spring:message code=  "addAppUser.form.AddButton.label"/>" />
+						value="<spring:message code=  "appUser.form.AddButton.label"/>" />
 				</div>
 			</div>
 		</fieldset>
