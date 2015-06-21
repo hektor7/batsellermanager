@@ -20,6 +20,13 @@
 		<put-attribute name="tagline" value="Welcome" />
 		<put-attribute name="content" value="/WEB-INF/views/welcome.jsp" />
 	</definition>
+	
+	<definition name="login" extends="baseLayout">
+		<put-attribute name="title" value="Login" />
+		<put-attribute name="heading" value="Login" />
+		<put-attribute name="tagline" value="Enter your Credentials" />
+		<put-attribute name="content" value="/WEB-INF/views/login.jsp" />
+	</definition>
 
 	<definition name="appUsers/list" extends="baseLayout">
 		<put-attribute name="title" value="Users" />

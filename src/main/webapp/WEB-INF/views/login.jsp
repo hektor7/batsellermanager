@@ -20,21 +20,22 @@
 							<br />
 						</div>
 					</c:if>
-					<form action="<c:url value= "/j_spring_security_check"></c:url>"
-						method="post">
+					<form action="<c:url value= "/j_spring_security_check"></c:url>" method="post">
 						<fieldset>
 							<div class="form-group">
 								<input class="form-control"
 									placeholder="<spring:message code="login.form.userName" />"
-									name='j_username' type="text">
+									name='username' type="text">
 							</div>
 							<div class="form-group">
 								<input class="form-control"
 									placeholder="<spring:message code="login.form.password" />"
-									name='j_password' type="password" value="">
+									name='password' type="password" value="">
 							</div>
 							<input class="btn btn-lg btn-success btn-block" type="submit"
 								value="<spring:message code="login.form.loginButton" />">
+							<input type="hidden" name="${_csrf.parameterName}"
+							value="${_csrf.token}" />
 						</fieldset>
 					</form>
 				</div>
