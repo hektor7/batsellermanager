@@ -5,8 +5,6 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
-//TODO: Define roles and roles hierarchy
-//TODO: Securize controllers
 //TODO: Authentication through database
 //TODO: Use failure login page with parameters like /login?login_error=1
 @Controller
