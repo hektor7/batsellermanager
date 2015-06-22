@@ -1,6 +1,7 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="spring" uri="http://www.springframework.org/tags"%>
 <%@ taglib prefix="tiles" uri="http://tiles.apache.org/tags-tiles"%>
+<%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags"%>
 
 
 <!DOCTYPE html>
@@ -22,6 +23,23 @@
 
 <body>
 	<div class="pull-right" style="padding-right: 50px">
+		<sec:authorize access="isAuthenticated()">
+			
+			<c:url var="logoutUrl" value="/j_spring_security_logout"/>
+			<form action="${logoutUrl}" id="logout" method="post">
+    			<input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
+			</form>
+			<a href="#" onclick="document.getElementById('logout').submit();"><spring:message code="baselayout.link.logout"/></a>
+			
+		</sec:authorize>
+		<sec:authorize access="isAnonymous()">
+			<a href="<spring:url value="/loginAccess"/>">
+				<spring:message code="baselayout.link.login"/>
+			</a>
+		</sec:authorize>
+		
+	</div>
+	<div class="pull-right" style="padding-right: 10px">
 			<a href="?language=en"> <spring:message
 					code="languages.english.label" />
 			</a>| <a href="?language=es"> <spring:message

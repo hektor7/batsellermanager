@@ -6,7 +6,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
 //TODO: Define roles and roles hierarchy
-//TODO: Logout
 //TODO: Securize controllers
 //TODO: Authentication through database
 //TODO: Use failure login page with parameters like /login?login_error=1
@@ -26,8 +25,4 @@ public class LoginController {
 
 	}
 
-	@RequestMapping(value = "/logout", method = RequestMethod.GET)
-	public String logout(Model model) {
-		return "login";
-	}
 }

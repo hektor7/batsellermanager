@@ -12,18 +12,13 @@
 			access="hasRole('ROLE_ADMIN')" />
 
 
-		<security:form-login 
-			login-page="/loginAccess"
-			authentication-failure-url="/loginFailed"
-			username-parameter="username" 
-			password-parameter="password"
-			login-processing-url="/j_spring_security_check" />
-			
-		<security:logout 
-			logout-url="/j_spring_security_logout"
-			logout-success-url="/logout" />
-			
-		<security:csrf/>
+		<security:form-login login-page="/loginAccess"
+			authentication-failure-url="/loginFailed" username-parameter="username"
+			password-parameter="password" login-processing-url="/j_spring_security_check" />
+
+		<security:logout logout-url="/j_spring_security_logout" />
+
+		<security:csrf />
 
 	</security:http>
 
