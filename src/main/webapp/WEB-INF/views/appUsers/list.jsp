@@ -20,10 +20,26 @@
 		<tbody>
 			<c:forEach items="${appUsers}" var="appUser">
 				<tr>
+					<td>${appUser.id}</td>
 					<td>${appUser.userName}</td>
 					<td>${appUser.name}</td>
 					<td>${appUser.firstSurname}</td>
 					<td>${appUser.secondSurname}</td>
+					<td class="pull-right">
+						<a href="<spring:url value="/appUsers/appUser?id=${appUser.id}" />" class="btn btn-default">
+							<span class="glyphicon glyphicon-zoom-in"></span> 
+						</a>
+					</td>
+					<td class="pull-right">
+						<a href="<spring:url value="/appUsers/appUser?modify=${appUser.id}" />" class="btn btn-default">
+							<span class="glyphicon glyphicon-pencil"></span> 
+						</a>
+					</td>
+					<td class="pull-right">
+						<a href="<spring:url value="/appUsers/delete?id=${appUser.id}" />" class="btn btn-default">
+							<span class="glyphicon glyphicon-trash"></span> 
+						</a>
+					</td>
 				</tr>
 			</c:forEach>
 
