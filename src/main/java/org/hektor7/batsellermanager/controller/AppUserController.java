@@ -75,6 +75,22 @@ public class AppUserController {
 		return "appUsers/details";
 	}
 
+	@RequestMapping("/delete")
+	public String deleteAppUser(@RequestParam("id") String appUserId,
+			Model model) {
+
+		Long id = 0L;
+		if (!StringUtils.isEmpty(appUserId)) {
+			id = Long.valueOf(appUserId);
+		}
+		
+		if (id > 0L) {
+			this.appUserService.removeAppUser(this.appUserService.getAppUserById(id));
+		}
+
+		return "redirect:/appUsers";
+	}
+	
 	@RequestMapping(value = "/add", method = RequestMethod.GET)
 	public String getAddNewAppUserForm(
 			@ModelAttribute("newAppUser") AppUser newAppUser) {
