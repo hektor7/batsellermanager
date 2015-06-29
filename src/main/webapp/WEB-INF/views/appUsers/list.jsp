@@ -36,9 +36,12 @@
 						</a>
 					</td>
 					<td class="pull-right">
-						<a href="<spring:url value="/appUsers/delete?id=${appUser.id}" />" class="btn btn-default">
-							<span class="glyphicon glyphicon-trash"></span> 
-						</a>
+						<form id="deleteForm" action="<spring:url value="/appUsers/delete?id=${appUser.id}" />" method="POST">
+							<input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
+							<button class="btn btn-default" type="submit">
+	        					<i class="glyphicon glyphicon-trash"></i>
+	    					</button>
+						</form>
 					</td>
 				</tr>
 			</c:forEach>

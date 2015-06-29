@@ -75,7 +75,7 @@ public class AppUserController {
 		return "appUsers/details";
 	}
 
-	@RequestMapping("/delete")
+	@RequestMapping(value="/delete", method=RequestMethod.POST)
 	public String deleteAppUser(@RequestParam("id") String appUserId,
 			Model model) {
 
