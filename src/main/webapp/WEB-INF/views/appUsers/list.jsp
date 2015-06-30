@@ -2,6 +2,7 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 
 <section class="container">
+	
 	<div class="pull-right" >
 			<a href="<spring:url value="/appUsers/add" />" class="btn btn-default">
 					<span class="glyphicon glyphicon-plus"></span> <spring:message
@@ -36,11 +37,12 @@
 						</a>
 					</td>
 					<td class="pull-right">
-						<form id="deleteForm" action="<spring:url value="/appUsers/delete?id=${appUser.id}" />" method="POST">
+						<form action="<spring:url value="/appUsers/delete?id=${appUser.id}" />" method="POST">
 							<input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
 							<button class="btn btn-default" type="submit">
 	        					<i class="glyphicon glyphicon-trash"></i>
 	    					</button>
+	    					
 						</form>
 					</td>
 				</tr>
