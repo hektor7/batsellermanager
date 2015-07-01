@@ -32,7 +32,7 @@
 						</a>
 					</td>
 					<td class="pull-right">
-						<a href="<spring:url value="/appUsers/appUser?modify=${appUser.id}" />" class="btn btn-default">
+						<a href="<spring:url value="/appUsers/modify?id=${appUser.id}" />" class="btn btn-default">
 							<span class="glyphicon glyphicon-pencil"></span> 
 						</a>
 					</td>

@@ -4,7 +4,7 @@
 
 
 <section class="container">
-	<form:form modelAttribute="newAppUser" class="form-horizontal">
+	<form:form modelAttribute="appUser" class="form-horizontal">
 		<form:errors path="*" cssClass="alert alert-danger" element="div" />
 		<fieldset>
 			<legend>
@@ -57,7 +57,12 @@
 
 			
 			<div class="form-group">
+				
 				<div class="col-lg-offset-2 col-lg-10">
+					<a href="<spring:url value="/appUsers" />" class="btn btn-default">
+						<span class="glyphicon-hand-left glyphicon"></span> <spring:message
+							code="appUser.form.back" />
+					</a>
 					<input type="submit" id="btnAdd" class="btn btn-primary"
 						value="<spring:message code=  "appUser.form.AddButton.label"/>" />
 				</div>

@@ -31,12 +31,25 @@ import org.springframework.web.servlet.ModelAndView;
 @RequestMapping("/appUsers")
 public class AppUserController {
 
+	/**
+	 * AppUser service.
+	 */
 	@Autowired
 	private AppUserService appUserService;
 
+	/**
+	 * AppUser validator.
+	 */
 	@Autowired
 	private AppUserValidator appUserValidator;
 
+	/**
+	 * Binding initializer for the binding of fields.
+	 * It improves the security and defines which fields
+	 * are allowed.
+	 * 
+	 * @param binder binder
+	 */
 	@InitBinder
 	public void initialiseBinder(WebDataBinder binder) {
 
@@ -46,19 +59,26 @@ public class AppUserController {
 		binder.setValidator(this.appUserValidator);
 	}
 
+	/**
+	 * Handler method that obtains a list of all appUsers.
+	 * 
+	 * @param model
+	 * @return
+	 */
 	@RequestMapping
 	public String list(Model model) {
 		model.addAttribute("appUsers", this.appUserService.getAllAppUsers());
 		return "appUsers/list";
 	}
 
-	@RequestMapping("/all")
-	public String allAppUsers(Model model) {
-		model.addAttribute("appUsers", this.appUserService.getAllAppUsers());
-
-		return "appUsers/list";
-	}
-
+	
+	/**
+	 * Handler method for obtaining details for a given appUser's id.
+	 * 
+	 * @param appUserId appUser id
+	 * @param model from the view
+	 * @return navigation string
+	 */
 	@RequestMapping("/appUser")
 	public String getAppUserById(@RequestParam("id") String appUserId,
 			Model model) {
@@ -75,7 +95,14 @@ public class AppUserController {
 		return "appUsers/details";
 	}
 
-	@RequestMapping(value="/delete", method=RequestMethod.POST)
+	/**
+	 * Handler method for deletion of appUser.
+	 * 
+	 * @param appUserId to be deleted
+	 * @param model of the view
+	 * @return navigation string
+	 */
+	@RequestMapping(value = "/delete", method = RequestMethod.POST)
 	public String deleteAppUser(@RequestParam("id") String appUserId,
 			Model model) {
 
@@ -83,33 +110,97 @@ public class AppUserController {
 		if (!StringUtils.isEmpty(appUserId)) {
 			id = Long.valueOf(appUserId);
 		}
-		
+
 		if (id > 0L) {
-			this.appUserService.removeAppUser(this.appUserService.getAppUserById(id));
+			this.appUserService.removeAppUser(this.appUserService
+					.getAppUserById(id));
 		}
 
 		return "redirect:/appUsers";
 	}
-	
+
+	/**
+	 * Handler method that obstains the form for new appUser
+	 * 
+	 * @param newAppUser new appUser
+	 * @return navigation string
+	 */
 	@RequestMapping(value = "/add", method = RequestMethod.GET)
 	public String getAddNewAppUserForm(
-			@ModelAttribute("newAppUser") AppUser newAppUser) {
+			@ModelAttribute("appUser") AppUser newAppUser) {
 		return "appUsers/form";
 	}
 
+	/**
+	 * Handler Method that process a new appUser in order to insert it.
+	 * 
+	 * @param appUser to be inserted
+	 * @param result binding result
+	 * @param request http request
+	 * @return navigation string
+	 */
 	@RequestMapping(value = "/add", method = RequestMethod.POST)
 	public String processAddNewAppUserForm(
-			@ModelAttribute("newAppUser") @Valid AppUser newAppUser,
+			@ModelAttribute("appUser") @Valid AppUser appUser,
 			BindingResult result, // For customize the WebDataBinder
 			HttpServletRequest request) {
 
+		return processAndSaveAppUser(appUser, result);
+	}
+
+	/**
+	 * Handler method that obtains the modify form.
+	 * 
+	 * @param appUserId appUser id
+	 * @param model view model
+	 * @return navigation string
+	 */
+	@RequestMapping(value = "/modify", method = RequestMethod.GET)
+	public String getModifyForm(@RequestParam("id") String appUserId,
+			Model model) {
+
+		Long id = 0L;
+		if (!StringUtils.isEmpty(appUserId)) {
+			id = Long.valueOf(appUserId);
+		}
+
+		model.addAttribute("appUser", this.appUserService.getAppUserById(id));
+
+		return "appUsers/form";
+	}
+
+	/**
+	 * Handler method for modify appUsers.
+	 * 
+	 * @param appUser to be modified
+	 * @param result binding result
+	 * @param request http request
+	 * @return string navigation
+	 */
+	@RequestMapping(value = "/modify", method = RequestMethod.POST)
+	public String processModifyAppUserForm(
+			@ModelAttribute("appUser") @Valid AppUser appUser,
+			BindingResult result, // For customize the WebDataBinder
+			HttpServletRequest request) {
+
+		return this.processAndSaveAppUser(appUser, result);
+	}
+
+	/**
+	 * Handler method that for insert and update appUsers
+	 * 
+	 * @param appUser to be saved (updated or inserted)
+	 * @param result binding result
+	 * @return navigation string
+	 */
+	private String processAndSaveAppUser(AppUser appUser, BindingResult result) {
 		if (result.hasErrors()) {
 			return "appUsers/form";
 		}
 
 		this.checkForNonAllowedFieldsOnInsert(result);
 
-		this.appUserService.saveAppUser(newAppUser);
+		this.appUserService.saveAppUser(appUser);
 
 		return "redirect:/appUsers";
 	}
@@ -128,6 +219,13 @@ public class AppUserController {
 		}
 	}
 
+	/**
+	 * Method for handling of AppUserNotFoundException exception.
+	 * 
+	 * @param req http request
+	 * @param exception exception
+	 * @return Model and view
+	 */
 	@ExceptionHandler(AppUserNotFoundException.class)
 	public ModelAndView handleError(HttpServletRequest req,
 			AppUserNotFoundException exception) {
