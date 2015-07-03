@@ -15,10 +15,10 @@
 				<label class="control-label col-lg-2 col-lg-2" for="iUserName">
 					<spring:message code="appUser.form.userName.label" />
 				</label>
-				<div class="col-lg-10">
+				<div class="col-lg-10">					
 					<form:input id="iUserName" path="userName" type="text"
-						class="form:input-large" />
-					<form:errors path="userName" cssClass="text-danger" />
+						class="form:input-large" disabled="${appUser.id != null}"/>
+					<form:errors path="userName" cssClass="text-danger" />					
 				</div>
 			</div>
 			

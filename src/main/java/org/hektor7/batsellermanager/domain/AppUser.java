@@ -45,7 +45,7 @@ public class AppUser implements Serializable {
 
 	@NotEmpty
 	@Size(min=4, max=20)
-	@Column(unique = true, nullable = false)
+	@Column(unique = true, nullable = false, updatable=false)
 	//TODO: Create @UserName validator
 	private String userName;
 	
