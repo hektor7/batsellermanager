@@ -3,8 +3,6 @@ package org.hektor7.batsellermanager.validator;
 import java.util.HashSet;
 import java.util.Set;
 
-import javax.validation.ConstraintViolation;
-
 import org.hektor7.batsellermanager.domain.AppUser;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.validation.Errors;
@@ -38,7 +36,7 @@ public class AppUserValidator implements Validator {
 
 	public void validate(Object target, Errors errors) {
 		
-		// It returns all of the constraints violation (bean validations)
+		/*// It returns all of the constraints violation (bean validations)
 		Set<ConstraintViolation<Object>> constraintViolations = beanValidator
 				.validate(target); 
 
@@ -48,7 +46,7 @@ public class AppUserValidator implements Validator {
 					.toString();
 			String message = constraintViolation.getMessage();
 			errors.rejectValue(propertyPath, "", message);
-		}
+		}*///FIXME: It seems like Spring is already testing this...
 
 		// Handling of Spring validations. The springValidators collection is defined in the applicationContext file.
 		for (Validator validator : springValidators) {

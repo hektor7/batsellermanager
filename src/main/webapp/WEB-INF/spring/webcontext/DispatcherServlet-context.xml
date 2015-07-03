@@ -59,7 +59,7 @@
 
 	<!--END Bean validation support -->
 
-	<!-- START Custom Product Validation (Spring & Bean Validation) -->
+	<!-- START Custom AppUser Validation (Spring & Bean Validation) -->
 	<bean id="appUserValidator" class="org.hektor7.batsellermanager.validator.AppUserValidator">
 		<property name="springValidators">
 			<set>
