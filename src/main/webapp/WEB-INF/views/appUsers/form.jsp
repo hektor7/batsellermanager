@@ -60,11 +60,14 @@
 				
 				<div class="col-lg-offset-2 col-lg-10">
 					<a href="<spring:url value="/appUsers" />" class="btn btn-default">
-						<span class="glyphicon-hand-left glyphicon"></span> <spring:message
-							code="appUser.form.back" />
+						<span class="glyphicon-hand-left glyphicon"></span>
+						<spring:message code="appUser.form.back" />
 					</a>
-					<input type="submit" id="btnAdd" class="btn btn-primary"
-						value="<spring:message code=  "appUser.form.AddButton.label"/>" />
+					
+					<button type="submit" id="btnSave" class="btn btn-success">
+						<span class="glyphicon glyphicon-ok"></span>
+						<spring:message code=  "appUser.form.AddButton.label"/>
+					</button>
 				</div>
 			</div>
 		</fieldset>
