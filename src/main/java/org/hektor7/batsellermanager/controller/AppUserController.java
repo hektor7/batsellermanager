@@ -54,7 +54,7 @@ public class AppUserController {
 	public void initialiseBinder(WebDataBinder binder) {
 
 		binder.setAllowedFields("id", "name", "firstSurname", "secondSurname",
-				"userName", "password");
+				"userName", "password", "language");
 
 		binder.setValidator(this.appUserValidator);
 	}

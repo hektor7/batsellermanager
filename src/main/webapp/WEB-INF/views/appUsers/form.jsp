@@ -8,7 +8,7 @@
 		<form:errors path="*" cssClass="alert alert-danger" element="div" />
 		<fieldset>
 			<legend>
-				<spring:message code="appUser.form.formTitle" />
+				<spring:message code="appUser.form.title" />
 			</legend>
 
 			<div class="form-group">

@@ -4,6 +4,7 @@
 
 <tiles-definitions>
 
+	<!-- Base -->
 	<definition name="baseLayout" template="/WEB-INF/tiles/template/baseLayout.jsp">
 		<put-attribute name="title" value="Sample Title" />
 		<put-attribute name="heading" value="" />
@@ -14,39 +15,44 @@
 		<put-attribute name="footer" value="/WEB-INF/tiles/template/footer.jsp" />
 	</definition>
 	
+	<!-- Welcome -->
 	<definition name="welcome" extends="baseLayout">
-		<put-attribute name="title" value="Welcome" />
-		<put-attribute name="heading" value="Welcome" />
-		<put-attribute name="tagline" value="Welcome" />
+		<put-attribute name="title" value="welcome.title" />
+		<put-attribute name="heading" value="welcome.header" />
+		<put-attribute name="tagline" value="welcome.tagline" />
 		<put-attribute name="content" value="/WEB-INF/views/welcome.jsp" />
 	</definition>
 	
+	<!-- Login -->
 	<definition name="login" extends="baseLayout">
-		<put-attribute name="title" value="Login" />
-		<put-attribute name="heading" value="Login" />
-		<put-attribute name="tagline" value="Enter your Credentials" />
+		<put-attribute name="title" value="login.title" />
+		<put-attribute name="heading" value="login.header" />
+		<put-attribute name="tagline" value="login.tagline" />
 		<put-attribute name="content" value="/WEB-INF/views/login.jsp" />
 	</definition>
-
+	
+	<!-- START AppUsers -->
 	<definition name="appUsers/list" extends="baseLayout">
-		<put-attribute name="title" value="Users" />
-		<put-attribute name="heading" value="Users" />
-		<put-attribute name="tagline" value="Available Users" />
+		<put-attribute name="title" value="appUser.list.title" />
+		<put-attribute name="heading" value="appUser.list.header" />
+		<put-attribute name="tagline" value="appUser.list.tagline" />
 		<put-attribute name="content" value="/WEB-INF/views/appUsers/list.jsp" />
 	</definition>
 
 	<definition name="appUsers/details" extends="baseLayout">
-		<put-attribute name="title" value="User" />
-		<put-attribute name="heading" value="User" />
-		<put-attribute name="tagline" value="User" />
+		<put-attribute name="title" value="appUser.details.title" />
+		<put-attribute name="heading" value="appUser.details.header" />
+		<put-attribute name="tagline" value="appUser.details.tagline" />
 		<put-attribute name="content" value="/WEB-INF/views/appUsers/details.jsp" />
 	</definition>
 	
 	<definition name="appUsers/form" extends="baseLayout">
-		<put-attribute name="title" value="User" />
-		<put-attribute name="heading" value="User" />
-		<put-attribute name="tagline" value="User" />
+		<put-attribute name="title" value="appUser.form.title" />
+		<put-attribute name="heading" value="appUser.form.header" />
+		<put-attribute name="tagline" value="appUser.form.tagline" />
 		<put-attribute name="content" value="/WEB-INF/views/appUsers/form.jsp" />
 	</definition>
+	
+	<!-- END AppUsers -->
 	
 </tiles-definitions>

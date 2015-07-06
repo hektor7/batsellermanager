@@ -1,6 +1,7 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="spring" uri="http://www.springframework.org/tags"%>
 <%@ taglib prefix="tiles" uri="http://tiles.apache.org/tags-tiles"%>
+<%@ taglib prefix="tilesx" uri="http://tiles.apache.org/tags-tiles-extras" %>
 <%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags"%>
 
 
@@ -11,7 +12,9 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title><tiles:insertAttribute name="title" /></title>
+<!-- Attribute for i18n, this allow us to use springmessages' keys in tile-definition.xml -->
+<tilesx:useAttribute id="titleKey" name="title"/>
+<title><spring:message code="${titleKey}"/></title>
 
 <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css"
 	rel="stylesheet">
@@ -68,10 +71,14 @@
 
 		<div class="jumbotron">
 			<h1>
-				<tiles:insertAttribute name="heading" />
+				<!-- Attribute for i18n, this allow us to use springmessages' keys in tile-definition.xml -->
+				<tilesx:useAttribute id="headingKey" name="heading"/>
+				<spring:message code="${headingKey}"/>
 			</h1>
 			<p>
-				<tiles:insertAttribute name="tagline" />
+				<!-- Attribute for i18n, this allow us to use springmessages' keys in tile-definition.xml -->
+				<tilesx:useAttribute id="taglineKey" name="tagline"/>
+				<spring:message code="${taglineKey}"/>
 			</p>
 		</div>
 

@@ -4,7 +4,7 @@
 
 			<div class="container">
 				<h1>
-					<spring:message code="welcome.header" />
+					<spring:message code="welcome.content" />
 				</h1>
 				<p></p>
 			</div>
