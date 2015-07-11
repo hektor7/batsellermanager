@@ -54,11 +54,29 @@
 		
 	</div>
 	<div class="pull-right" style="padding-right: 10px">
-			<a href="?language=en"> <spring:message
+		<!-- This allow to maintain all params and then it adds the new one param (language) -->
+		<c:url var="engUrl" value="">
+			<c:forEach items="${param}" var="entry">
+			    <c:if test="${entry.key != 'language'}">
+			        <c:param name="${entry.key}" value="${entry.value}" />
+			    </c:if>
+			</c:forEach>
+			<c:param name="language" value="en" />
+		</c:url>
+		<c:url var="esUrl" value="">
+			<c:forEach items="${param}" var="entry">
+			    <c:if test="${entry.key != 'language'}">
+			        <c:param name="${entry.key}" value="${entry.value}" />
+			    </c:if>
+			</c:forEach>
+			<c:param name="language" value="es" />
+		</c:url>
+		<a href="${engUrl}"><spring:message
 					code="languages.english.label" />
-			</a>| <a href="?language=es"> <spring:message
+		</a> | 
+		<a href="${esUrl}"><spring:message
 					code="languages.spanish.label" />
-			</a>
+		</a>
 	</div>
 
 	<div class="container">
